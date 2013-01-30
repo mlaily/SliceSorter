@@ -23,10 +23,21 @@ namespace SliceSorter
 
 			for (int i = 0; i < 360; i++)
 			{
-				var hsb = new HSBColor(i,1,1);
-				var rgb = hsb.ToRGBColor();
-				Console.WriteLine("{0} => {1}", hsb, rgb);
-				g.DrawLine(new Pen(rgb), i, 0, i, 200);
+				for (int j = 0; j < 100; j++)
+				{
+					var hsb = new HSBColor(i, 1, j / 100f);
+					var rgb = hsb.ToRGBColor();
+					g.DrawLine(new Pen(rgb), i, j, i, j + 1);
+				}
+			}
+			for (int i = 0; i < 360; i++)
+			{
+				for (int j = 0; j <= 100; j++)
+				{
+					var hsb = new HSBColor(i, j / 100f, 1);
+					var rgb = hsb.ToRGBColor();
+					g.DrawLine(new Pen(rgb), i, 200-j, i, 201-j);
+				}
 			}
 
 			//r-y-g-c-b-m-r
