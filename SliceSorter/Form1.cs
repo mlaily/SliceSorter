@@ -20,21 +20,30 @@ namespace SliceSorter
 		{
 			var g = this.CreateGraphics();
 			g.Clear(Color.Black);
+
+			for (int i = 0; i < 360; i++)
+			{
+				var hsb = new HSBColor(i,1,1);
+				var rgb = hsb.ToRGBColor();
+				Console.WriteLine("{0} => {1}", hsb, rgb);
+				g.DrawLine(new Pen(rgb), i, 0, i, 200);
+			}
+
 			//r-y-g-c-b-m-r
-			List<Color> colors = new List<Color>();
-			var r = new Random(42);
-			for (int i = 0; i < 800; i++)
-			{
-				colors.Add(Color.FromArgb(r.Next(256), r.Next(256), r.Next(256)));
-				g.DrawLine(new Pen(colors[i]), i, 0, i, 200);
-			}
+			//List<Color> colors = new List<Color>();
+			//var r = new Random(42);
+			//for (int i = 0; i < 800; i++)
+			//{
+			//    colors.Add(Color.FromArgb(r.Next(256), r.Next(256), r.Next(256)));
+			//    g.DrawLine(new Pen(colors[i]), i, 0, i, 200);
+			//}
 
-			colors.Sort(new ColorSorter());
+			//colors.Sort(new ColorSorter());
 
-			for (int i = 0; i < 800; i++)
-			{
-				g.DrawLine(new Pen(colors[i]), i, 200, i, 400);
-			}
+			//for (int i = 0; i < 800; i++)
+			//{
+			//    g.DrawLine(new Pen(colors[i]), i, 200, i, 400);
+			//}
 
 		}
 
