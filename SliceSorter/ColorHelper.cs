@@ -7,12 +7,12 @@ using System.Drawing;
 namespace SliceSorter
 {
 
-	class ColorSorter : IComparer<Color>
+	class TupleColorSorter : IComparer<Tuple<Rectangle, Color>>
 	{
-		public int Compare(Color x, Color y)
+		public int Compare(Tuple<Rectangle, Color> x, Tuple<Rectangle, Color> y)
 		{
-			var xHsb = HSBColor.FromRGBColor(x);
-			var yHsb = HSBColor.FromRGBColor(y);
+			var xHsb = HSBColor.FromRGBColor(x.Item2);
+			var yHsb = HSBColor.FromRGBColor(y.Item2);
 			return xHsb.H - yHsb.H;
 		}
 	}
