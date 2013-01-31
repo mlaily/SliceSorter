@@ -65,6 +65,7 @@ namespace SliceSorter
 			}
 			slicesColors.Sort(new TupleColorSorter());
 			var newB = new Bitmap(b.Width, b.Height);
+			newB.SetResolution(b.HorizontalResolution, b.VerticalResolution);
 			var g = Graphics.FromImage(newB);
 			int k = 0;
 			foreach (var item in slicesColors)

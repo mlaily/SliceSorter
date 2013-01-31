@@ -147,12 +147,12 @@
 			// 
 			// ofd1
 			// 
-			this.ofd1.Filter = "Bitmap|*.bmp|Jpeg|*.jpg|Png|*.png|Gif|*.gif|All files|*.*";
+			this.ofd1.Filter = "Png|*.png|Bitmap|*.bmp|Jpeg|*.jpg|Gif|*.gif|All files|*.*";
 			// 
 			// sfd1
 			// 
 			this.sfd1.DefaultExt = "png";
-			this.sfd1.Filter = "Bitmap|*.bmp|Jpeg|*.jpg|Png|*.png|Gif|*.gif|All files|*.*";
+			this.sfd1.Filter = "Png|*.png|Bitmap|*.bmp|Jpeg|*.jpg|Gif|*.gif|All files|*.*";
 			// 
 			// Form1
 			// 
