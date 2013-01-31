@@ -16,55 +16,26 @@ namespace SliceSorter
 			InitializeComponent();
 		}
 
-		private void Form1_Shown(object sender, EventArgs e)
+		private void btnBrowseOut_Click(object sender, EventArgs e)
 		{
-			var g = this.CreateGraphics();
-			g.Clear(Color.Black);
-
-			for (int i = 0; i < 360; i++)
+			if (!string.IsNullOrWhiteSpace(ofd1.FileName))
 			{
-				for (int j = 0; j < 100; j++)
-				{
-					var hsb = new HSBColor(i, 1, j / 100f);
-					var rgb = hsb.ToRGBColor();
-					g.DrawLine(new Pen(rgb), i, j, i, j + 1);
-				}
+				sfd1.FileName = System.IO.Path.GetFileNameWithoutExtension(ofd1.FileName) + ".png";
 			}
-			for (int i = 0; i < 360; i++)
+			if (sfd1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 			{
-				for (int j = 0; j <= 100; j++)
-				{
-					var hsb = new HSBColor(i, j / 100f, 1);
-					var rgb = hsb.ToRGBColor();
-					g.DrawLine(new Pen(rgb), i, 200-j, i, 201-j);
-				}
+				txtPathOut.Text = sfd1.FileName;
 			}
+		}
 
-			//r-y-g-c-b-m-r
-			//List<Color> colors = new List<Color>();
-			//var r = new Random(42);
-			//for (int i = 0; i < 800; i++)
-			//{
-			//    colors.Add(Color.FromArgb(r.Next(256), r.Next(256), r.Next(256)));
-			//    g.DrawLine(new Pen(colors[i]), i, 0, i, 200);
-			//}
-
-			//colors.Sort(new ColorSorter());
-
-			//for (int i = 0; i < 800; i++)
-			//{
-			//    g.DrawLine(new Pen(colors[i]), i, 200, i, 400);
-			//}
-
+		private void btnBrowseIn_Click(object sender, EventArgs e)
+		{
+			if (ofd1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				txtPathIn.Text = ofd1.FileName;
+			}
 		}
 
 	}
 
-	class ColorSorter : IComparer<Color>
-	{
-		public int Compare(Color x, Color y)
-		{
-			return 0;
-		}
-	}
 }

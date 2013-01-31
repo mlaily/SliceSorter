@@ -7,6 +7,16 @@ using System.Drawing;
 namespace SliceSorter
 {
 
+	class ColorSorter : IComparer<Color>
+	{
+		public int Compare(Color x, Color y)
+		{
+			var xHsb = HSBColor.FromRGBColor(x);
+			var yHsb = HSBColor.FromRGBColor(y);
+			return xHsb.H - yHsb.H;
+		}
+	}
+
 	public struct HSBColor
 	{
 		/// <summary>
@@ -44,27 +54,34 @@ namespace SliceSorter
 
 		public override string ToString()
 		{
-			return string.Format("H:{0}, S:{1}, B:{2}",H,S,B);
+			return string.Format("H:{0}, S:{1}, B:{2}", H, S, B);
 		}
 
 		private static void FromRGBColor(int r, int g, int b, out int h, out double s, out double v)
 		{
+			double rd = r / 255f, gd = g / 255f, bd = b / 255f;
 			//http://en.wikipedia.org/wiki/HSL_and_HSV#General_approach
-			int max = Math.Max(Math.Max(r, g), b);
-			int min = Math.Min(Math.Min(r, g), b);
-			int chroma = max - min;
+			double max = Math.Max(Math.Max(rd, gd), bd);
+			double min = Math.Min(Math.Min(rd, gd), bd);
+			double chroma = max - min;
 			double hPrime = 0;
-			if (max == r)
+			if (chroma == 0)
 			{
-				hPrime = (g - b) / chroma;
+				h = 0;
+				s = 0;
+				v = 0;
 			}
-			else if (max == g)
+			else if (max == rd)
 			{
-				hPrime = (b - r) / chroma + 2;
+				hPrime = (gd - bd) / chroma + (g < b ? 6 : 0); // mod 6
 			}
-			else if (max == b)
+			else if (max == gd)
 			{
-				hPrime = (r - g) / chroma + 4;
+				hPrime = (bd - rd) / chroma + 2;
+			}
+			else if (max == bd)
+			{
+				hPrime = (rd - gd) / chroma + 4;
 			}
 			h = (int)(60f * hPrime);
 			v = max;
